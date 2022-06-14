@@ -52,6 +52,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print(
+      '${field4.trim()} ${((double.parse(field4.trim()).toInt().toString()).characters.last)},'
+    );
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -126,8 +129,10 @@ class _MyHomePageState extends State<MyHomePage> {
                                   style: Theme.of(context).textTheme.headline4,
                                 ),
                                 Text(
-                                  String.fromCharCode(
-                                      (double.parse(field4.trim()).toInt())),
+                                  // field4,
+                                  // String.fromCharCode(
+                                  //     (double.parse(field4.trim()).toInt())),
+                                  ((double.parse(field4.trim()).toInt().toString()).characters.last),
                                   style: Theme.of(context).textTheme.headline4,
                                 ),
                               ],
@@ -154,6 +159,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> getThings() async {
+
     setState(() {
       isLoading = true;
     });
@@ -164,10 +170,10 @@ class _MyHomePageState extends State<MyHomePage> {
     print(json);
     final things = ThingSpeak.fromJson(json);
     setState(() {
-      field1 = things.feeds!.first.field1.toString();
-      field2 = things.feeds!.first.field2.toString();
-      field3 = things.feeds!.first.field3.toString();
-      field4 = things.feeds!.first.field4.toString();
+      field1 = things.feeds![1].field1.toString();
+      field2 = things.feeds![1].field2.toString();
+      field3 = things.feeds![1].field3.toString();
+      field4 = things.feeds![1].field4.toString();
       isLoading = false;
     });
   }
